@@ -1,5 +1,29 @@
-div {
-    background-color: orange;
+#quote-box {
+    background-color: white;
     width: 500px;
+    border-radius: 3px;
+    padding: 2rem;
+}
 
+.fa-icon {
+    margin-right: 1rem;
+}
+
+.bootstrap-btn:hover {
+    opacity: 0.9;
+}
+
+#text {
+    font-size: 2rem;
+}
+
+#author {
+    text-align: right;
+    margin-top: 1rem;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
 }
