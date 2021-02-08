@@ -14,7 +14,8 @@ const Quotes = props => {
     },
     text: {
       color: props.color,
-      transition: 'color ease-in-out 1s',
+      opacity: props.opacity,
+      transition: 'color ease-in-out 1s, opacity ease-in-out 1s',
     },
   };
 

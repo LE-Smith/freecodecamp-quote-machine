@@ -10,6 +10,7 @@ const QuoteContainer = props => {
   });
   const [primaryColor, setPrimaryColor] = useState("#EC357E");
   const colors = ["#EC357E","#431024","#4229A8","#666273","#2B8F9E","#2B8F9E","#658A55","#658A55","#658A55","#3E140A"];
+  const [opacity, setOpacity] = useState(1);
 
   const fetchQuotes = useCallback(async () => {
     if (quoteData.length === 0) {
@@ -27,14 +28,17 @@ const QuoteContainer = props => {
   const changeQuote = useCallback(() => {
     if (quoteData.length > 0) {
       const randomQuoteIndex = getRandomInt(0, quoteData.length);
-      const randomColorIndex = getRandomInt(0, colors.length);
       setQuoteState({
         text: quoteData[randomQuoteIndex].text,
         author: quoteData[randomQuoteIndex].author,
       });
-      setPrimaryColor(colors[randomColorIndex]);
     }
   }, [quoteData]);
+  
+  const changeColor = () => {
+    const randomColorIndex = getRandomInt(0, colors.length);
+    setPrimaryColor(colors[randomColorIndex]);
+  }
 
   useEffect(() => {
     fetchQuotes();
@@ -57,7 +61,12 @@ const QuoteContainer = props => {
     });
 
   const newQuoteClickedHandler = () => {
-    changeQuote();
+    setOpacity(0);
+    setTimeout(() => {
+      changeQuote();
+      setOpacity(1);
+      changeColor()
+    }, 1000);
   };
 
   const styles = {
@@ -74,6 +83,7 @@ const QuoteContainer = props => {
         text={quoteState.text}
         author={quoteState.author}
         color={primaryColor}
+        opacity={opacity}
         newQuoteClicked={newQuoteClickedHandler}
       />
     </div>
