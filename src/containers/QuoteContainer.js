@@ -1,9 +1,9 @@
 import React from 'react';
-import Quotes from '../components/Quotes';
+import Quote from '../components/Quote';
 
 const QuoteContainer = props => {
     return (
-        <Quotes text="We become what we think about." author="Earl Nightingale"/>
+        <Quote text="We become what we think about." author="Earl Nightingale"/>
     )
 }
 

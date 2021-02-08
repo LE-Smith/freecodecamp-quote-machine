@@ -1,5 +1,5 @@
 import React from 'react'
-import './Quotes.scss';
+import './Quote.scss';
 
 const Quotes = props => {
 
