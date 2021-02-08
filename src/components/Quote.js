@@ -9,10 +9,12 @@ const Quotes = props => {
   const styles = {
     btn: {
       backgroundColor: props.color,
+      transition: 'background-color ease-in-out 1s',
       border: 'none',
     },
     text: {
       color: props.color,
+      transition: 'color ease-in-out 1s',
     },
   };
 

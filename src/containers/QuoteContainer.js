@@ -1,67 +1,82 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import Quote from '../components/Quote';
-
+import './QuoteContainer.scss';
 const QuoteContainer = props => {
-    const [quoteData, setQuoteData] = useState([]);
-    const [quoteState, setQuoteState] = useState({
-      text: '',
-      author: '',
-    });
-    
-    const fetchQuotes = useCallback(async () => {
-      if (quoteData.length === 0) {
-        const fetched = await fetchQuoteData();
-        setQuoteData(fetched);
-      }},[quoteData.length])
-      
-      const getRandomInt = (min, max) => {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-      }
-      
-      const changeQuote = useCallback(() => {
-        if (quoteData.length > 0) {
-          const randomIndex = getRandomInt(0, quoteData.length);
-          setQuoteState({
-            text: quoteData[randomIndex].text,
-            author: quoteData[randomIndex].author,
-          })
-        }
-      },[quoteData]);
-      
-    useEffect(() => {
-      fetchQuotes();
-        }, [fetchQuotes]);
+  const [quoteData, setQuoteData] = useState([]);
+  const [quoteState, setQuoteState] = useState({
+    text: '',
+    author: '',
+  });
+  const [primaryColor, setPrimaryColor] = useState("#EC357E");
+  const colors = ["#EC357E","#431024","#4229A8","#666273","#2B8F9E","#2B8F9E","#658A55","#658A55","#658A55","#3E140A"];
 
-    useEffect(() => {
-      changeQuote();
-    }, [quoteData, changeQuote]);  
-
-    const fetchQuoteData = () => new Promise((resolve, reject) => {
-      axios.get('https://type.fit/api/quotes')
-      .then(result => {
-        resolve(result.data);
-          })
-      .catch((error) => {
-        reject(error.message)
-      })
-    })
-
-
-    const newQuoteClickedHandler = () => {
-      changeQuote();
+  const fetchQuotes = useCallback(async () => {
+    if (quoteData.length === 0) {
+      const fetched = await fetchQuoteData();
+      setQuoteData(fetched);
     }
+  }, [quoteData.length]);
 
+  const getRandomInt = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  };
+
+  const changeQuote = useCallback(() => {
+    if (quoteData.length > 0) {
+      const randomQuoteIndex = getRandomInt(0, quoteData.length);
+      const randomColorIndex = getRandomInt(0, colors.length);
+      setQuoteState({
+        text: quoteData[randomQuoteIndex].text,
+        author: quoteData[randomQuoteIndex].author,
+      });
+      setPrimaryColor(colors[randomColorIndex]);
+    }
+  }, [quoteData]);
+
+  useEffect(() => {
+    fetchQuotes();
+  }, [fetchQuotes]);
+
+  useEffect(() => {
+    changeQuote();
+  }, [quoteData, changeQuote]);
+
+  const fetchQuoteData = () =>
+    new Promise((resolve, reject) => {
+      axios
+        .get('https://type.fit/api/quotes')
+        .then(result => {
+          resolve(result.data);
+        })
+        .catch(error => {
+          reject(error.message);
+        });
+    });
+
+  const newQuoteClickedHandler = () => {
+    changeQuote();
+  };
+
+  const styles = {
+    wrapper: {
+      backgroundColor: primaryColor,
+      color: primaryColor,
+      transition: 'background-color ease-in-out 1s',
+    }
+  }
 
   return (
-    <Quote
-      text={quoteState.text}
-      author={quoteState.author}
-      color={props.color}
-      newQuoteClicked={newQuoteClickedHandler}
-    />
+    <div id="wrapper" style={styles.wrapper}>
+      <Quote
+        text={quoteState.text}
+        author={quoteState.author}
+        color={primaryColor}
+        newQuoteClicked={newQuoteClickedHandler}
+      />
+    </div>
   );
 };
 
