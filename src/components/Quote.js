@@ -15,7 +15,7 @@ const Quotes = props => {
     text: {
       color: props.color,
       opacity: props.opacity,
-      transition: 'color ease-in-out 1s, opacity ease-in-out 1s',
+      transition: 'color ease-in-out 1s, opacity ease-in-out 500ms',
     },
   };
 
@@ -29,14 +29,12 @@ const Quotes = props => {
         - {props.author}
       </p>
       <div id="buttons">
+        <a id="tweet-quote" href={`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${props.text}.${props.author}`}>
         <Button
           className="bootstrap-btn"
-          style={styles.btn}
-          id="test"
-          onClick={props.twitterClicked}
-          href={`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${props.text}.${props.author}`}
+          style={styles.btn}     
         >
-          <FontAwesomeIcon icon={faTwitter} /></Button>
+          <FontAwesomeIcon icon={faTwitter} /></Button></a>
         <Button
           className="bootstrap-btn"
           style={styles.btn}

@@ -9,7 +9,7 @@ const QuoteContainer = props => {
     author: '',
   });
   const [primaryColor, setPrimaryColor] = useState("#EC357E");
-  const colors = ["#EC357E","#431024","#4229A8","#666273","#2B8F9E","#2B8F9E","#658A55","#658A55","#658A55","#3E140A"];
+  const colors = ["#27AE60","#EC357E","#431024","#4229A8","#666273","#2B8F9E","#2B8F9E","#658A55","#658A55","#658A55","#3E140A", "#16A085", "#BDBB99"];
   const [opacity, setOpacity] = useState(1);
 
   const fetchQuotes = useCallback(async () => {
@@ -62,11 +62,11 @@ const QuoteContainer = props => {
 
   const newQuoteClickedHandler = () => {
     setOpacity(0);
+    changeColor()
     setTimeout(() => {
       changeQuote();
       setOpacity(1);
-      changeColor()
-    }, 1000);
+    }, 500);
   };
 
   const styles = {
