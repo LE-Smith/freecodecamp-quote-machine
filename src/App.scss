@@ -1,5 +1,14 @@
+@import "~bootstrap/scss/bootstrap";
+
 .App {
   text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .App-logo {

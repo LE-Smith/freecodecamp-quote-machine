@@ -5,7 +5,7 @@ import QuoteContainer from './containers/QuoteContainer';
 function App() {
   return (
     <div className="App">
-      <QuoteContainer />
+      <QuoteContainer color={'orange'}/>
     </div>
   );
 }
