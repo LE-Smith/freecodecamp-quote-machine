@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios'
 import Quote from '../components/Quote';
 
 const QuoteContainer = props => {
@@ -39,10 +40,9 @@ const QuoteContainer = props => {
     }, [quoteData, changeQuote]);  
 
     const fetchQuoteData = () => new Promise((resolve, reject) => {
-      fetch('https://type.fit/api/quotes')
-      .then(response => response.json())
+      axios.get('https://type.fit/api/quotes')
       .then(result => {
-        resolve(result);
+        resolve(result.data);
           })
       .catch((error) => {
         reject(error.message)
@@ -60,7 +60,6 @@ const QuoteContainer = props => {
       text={quoteState.text}
       author={quoteState.author}
       color={props.color}
-      twitterClicked={() => console.log('twitter clicked')}
       newQuoteClicked={newQuoteClickedHandler}
     />
   );

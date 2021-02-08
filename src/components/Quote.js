@@ -29,11 +29,11 @@ const Quotes = props => {
         <Button
           className="bootstrap-btn"
           style={styles.btn}
-          id="new-quote"
+          id="test"
           onClick={props.twitterClicked}
+          href={`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${props.text}.${props.author}`}
         >
-          <FontAwesomeIcon className="fa-icon" icon={faTwitter} />
-        </Button>
+          <FontAwesomeIcon icon={faTwitter} /></Button>
         <Button
           className="bootstrap-btn"
           style={styles.btn}
