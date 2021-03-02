@@ -15,7 +15,8 @@ const QuoteContainer = props => {
   const fetchQuotes = useCallback(async () => {
     if (quoteData.length === 0) {
       const fetched = await fetchQuoteData();
-      setQuoteData(fetched);
+      console.log(fetched.quotes);
+      setQuoteData(fetched.quotes);
     }
   }, [quoteData.length]);
 
@@ -29,7 +30,7 @@ const QuoteContainer = props => {
     if (quoteData.length > 0) {
       const randomQuoteIndex = getRandomInt(0, quoteData.length);
       setQuoteState({
-        text: quoteData[randomQuoteIndex].text,
+        text: quoteData[randomQuoteIndex].quote,
         author: quoteData[randomQuoteIndex].author,
       });
     }
@@ -51,7 +52,7 @@ const QuoteContainer = props => {
   const fetchQuoteData = () =>
     new Promise((resolve, reject) => {
       axios
-        .get('https://type.fit/api/quotes')
+        .get('https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json')
         .then(result => {
           resolve(result.data);
         })
